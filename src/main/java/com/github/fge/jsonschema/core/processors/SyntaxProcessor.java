@@ -16,7 +16,7 @@
  * - ASL 2.0: http://www.apache.org/licenses/LICENSE-2.0.txt
  */
 
-package com.github.fge.jsonschema.core.keyword.syntax;
+package com.github.fge.jsonschema.core.processors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.NodeType;
