@@ -28,7 +28,6 @@ import com.github.fge.jsonschema.core.exceptions.JsonReferenceException;
 import com.github.fge.jsonschema.core.ref.JsonRef;
 
 import javax.annotation.concurrent.Immutable;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Base implementation of a {@link SchemaTree}
@@ -41,10 +40,6 @@ public abstract class BaseSchemaTree
     implements SchemaTree
 {
     private static final JsonNodeFactory FACTORY = JacksonUtils.nodeFactory();
-
-    private static final AtomicLong ID_GEN = new AtomicLong(0L);
-
-    private final long id;
 
     /**
      * The contents of {@code $schema} for that schema
@@ -98,7 +93,6 @@ public abstract class BaseSchemaTree
         this.pointer = pointer;
         node = pointer.path(baseNode);
         this.loadingRef = loadingRef;
-        id = ID_GEN.getAndIncrement();
 
         final JsonRef ref = idFromNode(baseNode);
 
@@ -110,7 +104,6 @@ public abstract class BaseSchemaTree
     protected BaseSchemaTree(final BaseSchemaTree other,
         final JsonPointer newPointer)
     {
-        id = other.id;
         dollarSchema = other.dollarSchema;
         baseNode = other.baseNode;
         loadingRef = other.loadingRef;
@@ -120,12 +113,6 @@ public abstract class BaseSchemaTree
 
         startingRef = other.startingRef;
         currentRef = nextRef(startingRef, newPointer, baseNode);
-    }
-
-    @Override
-    public final long getId()
-    {
-        return id;
     }
 
     @Override

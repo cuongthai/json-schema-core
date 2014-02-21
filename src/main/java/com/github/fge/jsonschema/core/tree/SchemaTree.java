@@ -83,8 +83,6 @@ public interface SchemaTree
      */
     JsonPointer matchingPointer(final JsonRef ref);
 
-    long getId();
-
     /**
      * Return the metaschema URI for that schema (ie, {@code $schema})
      *
