@@ -18,9 +18,10 @@
 
 package com.github.fge.jsonschema.core.keyword;
 
-import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
-import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
+import com.github.fge.jsonschema.core.keyword.digest.Digester;
+import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
+import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
 import com.github.fge.msgsimple.bundle.MessageBundle;
 import com.github.fge.msgsimple.load.MessageBundles;
 import com.google.common.annotations.Beta;
@@ -34,6 +35,7 @@ public final class Keyword
     private final String name;
     private final PointerCollector pointerCollector;
     private final SyntaxChecker syntaxChecker;
+    private final Digester digester;
 
     public static Builder withName(final String name)
     {
@@ -45,6 +47,7 @@ public final class Keyword
         name = builder.name;
         pointerCollector = builder.pointerCollector;
         syntaxChecker = builder.syntaxChecker;
+        digester = builder.digester;
     }
 
     public String getName()
@@ -62,11 +65,17 @@ public final class Keyword
         return syntaxChecker;
     }
 
+    public Digester getDigester()
+    {
+        return digester;
+    }
+
     public static final class Builder
     {
         private final String name;
         private PointerCollector pointerCollector = null;
         private SyntaxChecker syntaxChecker = null;
+        private Digester digester = null;
 
         private Builder(final String name)
         {
@@ -85,6 +94,13 @@ public final class Keyword
         {
             this.syntaxChecker = BUNDLE.checkNotNull(syntaxChecker,
                 "keywordDescriptor.nullSyntaxChecker");
+            return this;
+        }
+
+        public Builder setDigester(final Digester digester)
+        {
+            this.digester = BUNDLE.checkNotNull(digester,
+                "keywordDescriptor.nullDigester");
             return this;
         }
 

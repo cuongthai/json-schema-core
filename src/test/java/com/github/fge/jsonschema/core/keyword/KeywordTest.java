@@ -18,6 +18,7 @@
 
 package com.github.fge.jsonschema.core.keyword;
 
+import com.github.fge.jsonschema.core.keyword.digest.Digester;
 import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
@@ -69,17 +70,32 @@ public final class KeywordTest
         }
     }
 
+    @Test(dependsOnMethods = "cannotCreateKeywordWithNullName")
+    public void cannotSubmitNullDigester()
+    {
+        try {
+            Keyword.withName("foo").setDigester(null);
+            fail("No exception thrown!!");
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(),
+                BUNDLE.getMessage("keywordDescriptor.nullDigester"));
+        }
+    }
+
     @Test
     public void descriptorElementsAreRetrievable()
     {
         final String name = "foo";
         final SyntaxChecker checker = mock(SyntaxChecker.class);
         final PointerCollector collector = mock(PointerCollector.class);
+        final Digester digester = mock(Digester.class);
         final Keyword descriptor = Keyword.withName(name)
-            .setSyntaxChecker(checker).setPointerCollector(collector).build();
+            .setSyntaxChecker(checker).setPointerCollector(collector)
+            .setDigester(digester).build();
 
         assertSame(descriptor.getName(), name);
         assertSame(descriptor.getSyntaxChecker(), checker);
         assertSame(descriptor.getPointerCollector(), collector);
+        assertSame(descriptor.getDigester(), digester);
     }
 }
