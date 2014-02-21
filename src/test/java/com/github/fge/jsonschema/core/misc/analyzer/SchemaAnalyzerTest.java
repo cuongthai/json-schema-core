@@ -24,7 +24,7 @@ import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jackson.NodeType;
 import com.github.fge.jackson.jsonpointer.JsonPointer;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.keyword.KeywordDescriptor;
+import com.github.fge.jsonschema.core.keyword.Keyword;
 import com.github.fge.jsonschema.core.schema.SchemaDescriptor;
 import com.github.fge.jsonschema.core.schema.SchemaDescriptorBuilder;
 import com.github.fge.jsonschema.core.schema.SchemaSelector;
@@ -77,13 +77,13 @@ public final class SchemaAnalyzerTest
         final SchemaDescriptorBuilder builder = SchemaDescriptor.newBuilder()
             .setLocator(ROOT);
 
-        KeywordDescriptor descriptor;
+        Keyword descriptor;
 
-        descriptor = KeywordDescriptor.withName(K1).setSyntaxChecker(checker1)
+        descriptor = Keyword.withName(K1).setSyntaxChecker(checker1)
             .setPointerCollector(collector1).build();
         builder.addKeyword(descriptor);
 
-        descriptor = KeywordDescriptor.withName(K2).setSyntaxChecker(checker2)
+        descriptor = Keyword.withName(K2).setSyntaxChecker(checker2)
             .setPointerCollector(collector2).build();
         builder.addKeyword(descriptor);
 

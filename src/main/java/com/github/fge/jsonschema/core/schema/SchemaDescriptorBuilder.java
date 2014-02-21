@@ -19,7 +19,7 @@
 package com.github.fge.jsonschema.core.schema;
 
 import com.github.fge.Thawed;
-import com.github.fge.jsonschema.core.keyword.KeywordDescriptor;
+import com.github.fge.jsonschema.core.keyword.Keyword;
 import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
 import com.github.fge.jsonschema.core.util.URIUtils;
 import com.github.fge.msgsimple.bundle.MessageBundle;
@@ -38,7 +38,7 @@ public final class SchemaDescriptorBuilder
         = MessageBundles.getBundle(JsonSchemaCoreMessageBundle.class);
 
     URI locator;
-    final Map<String, KeywordDescriptor> keywords;
+    final Map<String, Keyword> keywords;
 
     SchemaDescriptorBuilder()
     {
@@ -61,7 +61,7 @@ public final class SchemaDescriptorBuilder
     }
 
     public SchemaDescriptorBuilder addKeyword(
-        final KeywordDescriptor descriptor)
+        final Keyword descriptor)
     {
         BUNDLE.checkNotNull(descriptor, "schemaDescriptor.nullDescriptor");
         keywords.put(descriptor.getName(), descriptor);

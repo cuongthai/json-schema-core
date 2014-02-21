@@ -86,10 +86,10 @@ public final class SchemaDescriptorTest
     public void enteredInformationIsRetained()
     {
         final URI locator = URI.create("foo://bar#");
-        final KeywordDescriptor foo = KeywordDescriptor.withName("foo").build();
-        final KeywordDescriptor k1 = KeywordDescriptor.withName(K1)
+        final Keyword foo = Keyword.withName("foo").build();
+        final Keyword k1 = Keyword.withName(K1)
             .setPointerCollector(collector1).setSyntaxChecker(checker1).build();
-        final KeywordDescriptor k2 = KeywordDescriptor.withName(K2)
+        final Keyword k2 = Keyword.withName(K2)
             .setPointerCollector(collector2).setSyntaxChecker(checker2).build();
 
         final SchemaDescriptor descriptor = builder.setLocator(locator)

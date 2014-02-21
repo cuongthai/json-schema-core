@@ -19,7 +19,7 @@
 package com.github.fge.jsonschema.core.schema;
 
 import com.github.fge.Frozen;
-import com.github.fge.jsonschema.core.keyword.KeywordDescriptor;
+import com.github.fge.jsonschema.core.keyword.Keyword;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
 import com.google.common.annotations.Beta;
@@ -34,7 +34,7 @@ public final class SchemaDescriptor
     implements Frozen<SchemaDescriptorBuilder>
 {
     final URI locator;
-    final Map<String, KeywordDescriptor> keywords;
+    final Map<String, Keyword> keywords;
 
     public static SchemaDescriptorBuilder newBuilder()
     {
@@ -64,7 +64,7 @@ public final class SchemaDescriptor
 
         SyntaxChecker checker;
 
-        for (final Map.Entry<String, KeywordDescriptor> entry:
+        for (final Map.Entry<String, Keyword> entry:
             keywords.entrySet()) {
             checker = entry.getValue().getSyntaxChecker();
             if (checker != null)
@@ -81,7 +81,7 @@ public final class SchemaDescriptor
 
         PointerCollector collector;
 
-        for (final Map.Entry<String, KeywordDescriptor> entry:
+        for (final Map.Entry<String, Keyword> entry:
             keywords.entrySet()) {
             collector = entry.getValue().getPointerCollector();
             if (collector != null)

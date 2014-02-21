@@ -28,7 +28,7 @@ import org.testng.annotations.Test;
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.*;
 
-public final class KeywordDescriptorTest
+public final class KeywordTest
 {
     private static final MessageBundle BUNDLE
         = MessageBundles.getBundle(JsonSchemaCoreMessageBundle.class);
@@ -37,7 +37,7 @@ public final class KeywordDescriptorTest
     public void cannotCreateKeywordWithNullName()
     {
         try {
-            KeywordDescriptor.withName(null);
+            Keyword.withName(null);
             fail("No exception thrown!!");
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(),
@@ -49,7 +49,7 @@ public final class KeywordDescriptorTest
     public void cannotSubmitNullPointerCollector()
     {
         try {
-            KeywordDescriptor.withName("foo").setPointerCollector(null);
+            Keyword.withName("foo").setPointerCollector(null);
             fail("No exception thrown!!");
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(),
@@ -61,7 +61,7 @@ public final class KeywordDescriptorTest
     public void cannotSubmitNullSyntaxChecker()
     {
         try {
-            KeywordDescriptor.withName("foo").setSyntaxChecker(null);
+            Keyword.withName("foo").setSyntaxChecker(null);
             fail("No exception thrown!!");
         } catch (NullPointerException e) {
             assertEquals(e.getMessage(),
@@ -73,7 +73,7 @@ public final class KeywordDescriptorTest
     public void mustHaveSyntaxCheckerWithPointerCollector()
     {
         try {
-            KeywordDescriptor.withName("foo")
+            Keyword.withName("foo")
                 .setPointerCollector(mock(PointerCollector.class)).build();
             fail("No exception thrown!");
         } catch (IllegalArgumentException e) {
@@ -88,7 +88,7 @@ public final class KeywordDescriptorTest
         final String name = "foo";
         final SyntaxChecker checker = mock(SyntaxChecker.class);
         final PointerCollector collector = mock(PointerCollector.class);
-        final KeywordDescriptor descriptor = KeywordDescriptor.withName(name)
+        final Keyword descriptor = Keyword.withName(name)
             .setSyntaxChecker(checker).setPointerCollector(collector).build();
 
         assertSame(descriptor.getName(), name);

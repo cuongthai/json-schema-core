@@ -19,7 +19,7 @@
 package com.github.fge.jsonschema.core.schema;
 
 import com.github.fge.jsonschema.SchemaVersion;
-import com.github.fge.jsonschema.core.keyword.KeywordDescriptor;
+import com.github.fge.jsonschema.core.keyword.Keyword;
 import com.github.fge.jsonschema.core.util.Dictionary;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.dictionaries.DraftV3SyntaxCheckerDictionary;
@@ -74,12 +74,12 @@ public final class SchemaDescriptors
     private static SchemaDescriptor draftv4Descriptor()
     {
         final SchemaDescriptorBuilder builder = SchemaDescriptor.newBuilder();
-        final List<KeywordDescriptor> list
+        final List<Keyword> list
             = mergeDicts(DraftV4SyntaxCheckerDictionary.get(),
             DraftV4PointerCollectorDictionary.get());
 
         builder.setLocator(SchemaVersion.DRAFTV4.getLocation());
-        for (final KeywordDescriptor descriptor: list)
+        for (final Keyword descriptor: list)
             builder.addKeyword(descriptor);
         return builder.freeze();
     }
@@ -87,12 +87,12 @@ public final class SchemaDescriptors
     private static SchemaDescriptor draftv4HyperSchemaDescriptor()
     {
         final SchemaDescriptorBuilder builder = SchemaDescriptor.newBuilder();
-        final List<KeywordDescriptor> list
+        final List<Keyword> list
             = mergeDicts(DraftV4HyperSchemaSyntaxCheckerDictionary.get(),
             DraftV4PointerCollectorDictionary.get());
 
         builder.setLocator(SchemaVersion.DRAFTV4_HYPERSCHEMA.getLocation());
-        for (final KeywordDescriptor descriptor: list)
+        for (final Keyword descriptor: list)
             builder.addKeyword(descriptor);
         return builder.freeze();
     }
@@ -100,33 +100,33 @@ public final class SchemaDescriptors
     private static SchemaDescriptor draftv3Descriptor()
     {
         final SchemaDescriptorBuilder builder = SchemaDescriptor.newBuilder();
-        final List<KeywordDescriptor> list
+        final List<Keyword> list
             = mergeDicts(DraftV3SyntaxCheckerDictionary.get(),
             DraftV3PointerCollectorDictionary.get());
 
         builder.setLocator(SchemaVersion.DRAFTV3.getLocation());
-        for (final KeywordDescriptor descriptor: list)
+        for (final Keyword descriptor: list)
             builder.addKeyword(descriptor);
         return builder.freeze();
     }
 
-    private static List<KeywordDescriptor> mergeDicts(
+    private static List<Keyword> mergeDicts(
         final Dictionary<SyntaxChecker> checkers,
         final Dictionary<PointerCollector> collectors
     )
     {
-        final Map<String, KeywordDescriptor.Builder> map
+        final Map<String, Keyword.Builder> map
             = Maps.newHashMap();
 
         String name;
-        KeywordDescriptor.Builder builder;
+        Keyword.Builder builder;
 
         for (final Map.Entry<String, SyntaxChecker> entry:
             checkers.entries().entrySet()) {
             name = entry.getKey();
             builder = map.get(name);
             if (builder == null) {
-                builder = KeywordDescriptor.withName(name);
+                builder = Keyword.withName(name);
                 map.put(name, builder);
             }
             builder.setSyntaxChecker(entry.getValue());
@@ -137,16 +137,16 @@ public final class SchemaDescriptors
             name = entry.getKey();
             builder = map.get(name);
             if (builder == null) {
-                builder = KeywordDescriptor.withName(name);
+                builder = Keyword.withName(name);
                 map.put(name, builder);
             }
             builder.setPointerCollector(entry.getValue());
         }
 
-        final ImmutableList.Builder<KeywordDescriptor> listBuilder
+        final ImmutableList.Builder<Keyword> listBuilder
             = ImmutableList.builder();
 
-        for (final KeywordDescriptor.Builder k: map.values())
+        for (final Keyword.Builder k: map.values())
             listBuilder.add(k.build());
 
         return listBuilder.build();

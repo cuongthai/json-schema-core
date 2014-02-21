@@ -26,7 +26,7 @@ import com.github.fge.msgsimple.load.MessageBundles;
 import com.google.common.annotations.Beta;
 
 @Beta
-public final class KeywordDescriptor
+public final class Keyword
 {
     private static final MessageBundle BUNDLE
         = MessageBundles.getBundle(JsonSchemaCoreMessageBundle.class);
@@ -40,7 +40,7 @@ public final class KeywordDescriptor
         return new Builder(name);
     }
 
-    private KeywordDescriptor(final Builder builder)
+    private Keyword(final Builder builder)
     {
         name = builder.name;
         pointerCollector = builder.pointerCollector;
@@ -88,12 +88,12 @@ public final class KeywordDescriptor
             return this;
         }
 
-        public KeywordDescriptor build()
+        public Keyword build()
         {
             if (pointerCollector != null)
                 BUNDLE.checkArgument(syntaxChecker != null,
                     "keywordDescriptor.illegal");
-            return new KeywordDescriptor(this);
+            return new Keyword(this);
         }
     }
 }
