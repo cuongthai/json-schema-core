@@ -19,8 +19,8 @@
 package com.github.fge.jsonschema.core.walk;
 
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.schema.SchemaDescriptor;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
+import com.github.fge.jsonschema.core.schema.SchemaDescriptor;
 import com.github.fge.jsonschema.core.tree.SchemaTree;
 
 public final class DefaultSchemaWalker

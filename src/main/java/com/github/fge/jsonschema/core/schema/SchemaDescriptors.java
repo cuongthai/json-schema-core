@@ -20,14 +20,14 @@ package com.github.fge.jsonschema.core.schema;
 
 import com.github.fge.jsonschema.SchemaVersion;
 import com.github.fge.jsonschema.core.keyword.Keyword;
-import com.github.fge.jsonschema.core.util.Dictionary;
+import com.github.fge.jsonschema.core.keyword.collectors.DraftV3PointerCollectorDictionary;
+import com.github.fge.jsonschema.core.keyword.collectors.DraftV4PointerCollectorDictionary;
+import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.dictionaries.DraftV3SyntaxCheckerDictionary;
 import com.github.fge.jsonschema.core.keyword.syntax.dictionaries.DraftV4HyperSchemaSyntaxCheckerDictionary;
 import com.github.fge.jsonschema.core.keyword.syntax.dictionaries.DraftV4SyntaxCheckerDictionary;
-import com.github.fge.jsonschema.core.keyword.collectors.DraftV3PointerCollectorDictionary;
-import com.github.fge.jsonschema.core.keyword.collectors.DraftV4PointerCollectorDictionary;
-import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
+import com.github.fge.jsonschema.core.util.Dictionary;
 import com.google.common.annotations.Beta;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;

@@ -18,10 +18,10 @@
 
 package com.github.fge.jsonschema.core.keyword;
 
-import com.github.fge.jsonschema.core.keyword.digest.Digester;
-import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
-import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
+import com.github.fge.jsonschema.core.keyword.digest.Digester;
+import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
+import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
 import com.github.fge.msgsimple.bundle.MessageBundle;
 import com.github.fge.msgsimple.load.MessageBundles;
 import org.testng.annotations.Test;

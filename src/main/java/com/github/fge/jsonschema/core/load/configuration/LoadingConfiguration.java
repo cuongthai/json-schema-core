@@ -25,15 +25,15 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.github.fge.Frozen;
 import com.github.fge.Thawed;
 import com.github.fge.jackson.JacksonUtils;
-import com.github.fge.jsonschema.core.util.Dictionary;
-import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 import com.github.fge.jsonschema.core.load.Dereferencing;
 import com.github.fge.jsonschema.core.load.SchemaLoader;
 import com.github.fge.jsonschema.core.load.URIManager;
-import com.github.fge.jsonschema.core.load.uri.URITranslatorConfiguration;
 import com.github.fge.jsonschema.core.load.download.URIDownloader;
+import com.github.fge.jsonschema.core.load.uri.URITranslatorConfiguration;
 import com.github.fge.jsonschema.core.tree.CanonicalSchemaTree;
 import com.github.fge.jsonschema.core.tree.InlineSchemaTree;
+import com.github.fge.jsonschema.core.util.Dictionary;
+import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 import com.google.common.collect.ImmutableMap;
 
 import java.net.URI;

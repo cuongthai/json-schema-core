@@ -19,9 +19,9 @@
 package com.github.fge.jsonschema.core.keyword.syntax.checkers.common;
 
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.helpers.SchemaMapSyntaxChecker;
+import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.github.fge.jsonschema.core.util.RhinoHelper;
 import com.github.fge.msgsimple.bundle.MessageBundle;

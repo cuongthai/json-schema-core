@@ -18,11 +18,11 @@
 
 package com.github.fge.jsonschema.core.keyword;
 
+import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
+import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
+import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
 import com.github.fge.jsonschema.core.schema.SchemaDescriptor;
 import com.github.fge.jsonschema.core.schema.SchemaDescriptorBuilder;
-import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
-import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
-import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
 import com.github.fge.msgsimple.bundle.MessageBundle;
 import com.github.fge.msgsimple.load.MessageBundles;
 import com.google.common.collect.ImmutableMap;

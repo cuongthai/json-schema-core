@@ -20,8 +20,8 @@ package com.github.fge.jsonschema.core.keyword.collectors.helpers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.jsonpointer.JsonPointer;
-import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
+import com.github.fge.jsonschema.core.tree.SchemaTree;
 
 public abstract class AbstractPointerCollector
     implements PointerCollector

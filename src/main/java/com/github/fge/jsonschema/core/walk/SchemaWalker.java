@@ -20,10 +20,10 @@ package com.github.fge.jsonschema.core.walk;
 
 import com.github.fge.jackson.jsonpointer.JsonPointer;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.schema.SchemaDescriptor;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
-import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
+import com.github.fge.jsonschema.core.report.ProcessingReport;
+import com.github.fge.jsonschema.core.schema.SchemaDescriptor;
+import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.google.common.annotations.Beta;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

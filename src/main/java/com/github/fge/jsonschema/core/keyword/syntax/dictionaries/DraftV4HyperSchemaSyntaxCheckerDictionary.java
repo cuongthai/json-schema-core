@@ -19,13 +19,13 @@
 package com.github.fge.jsonschema.core.keyword.syntax.dictionaries;
 
 import com.github.fge.jackson.NodeType;
-import com.github.fge.jsonschema.core.util.Dictionary;
-import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.helpers.TypeOnlySyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.helpers.URISyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.hyperschema.LinksSyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.hyperschema.MediaSyntaxChecker;
+import com.github.fge.jsonschema.core.util.Dictionary;
+import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 
 /**
  * Draft v3 specific syntax checkers

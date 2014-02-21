@@ -20,9 +20,9 @@ package com.github.fge.jsonschema.core.keyword.collectors.common;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jackson.jsonpointer.JsonPointer;
-import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.github.fge.jsonschema.core.keyword.collectors.PointerCollector;
 import com.github.fge.jsonschema.core.keyword.collectors.helpers.AbstractPointerCollector;
+import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.google.common.collect.Lists;
 
 import java.util.Collection;

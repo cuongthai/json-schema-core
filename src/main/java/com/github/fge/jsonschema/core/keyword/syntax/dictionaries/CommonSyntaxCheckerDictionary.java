@@ -18,8 +18,6 @@
 
 package com.github.fge.jsonschema.core.keyword.syntax.dictionaries;
 
-import com.github.fge.jsonschema.core.util.Dictionary;
-import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.SyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.common.AdditionalSyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.common.EnumSyntaxChecker;
@@ -30,6 +28,8 @@ import com.github.fge.jsonschema.core.keyword.syntax.checkers.common.PatternSynt
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.helpers.PositiveIntegerSyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.helpers.TypeOnlySyntaxChecker;
 import com.github.fge.jsonschema.core.keyword.syntax.checkers.helpers.URISyntaxChecker;
+import com.github.fge.jsonschema.core.util.Dictionary;
+import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 
 import static com.github.fge.jackson.NodeType.*;
 

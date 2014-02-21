@@ -18,13 +18,13 @@
 
 package com.github.fge.jsonschema.core.keyword.collectors;
 
-import com.github.fge.jsonschema.core.util.Dictionary;
-import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 import com.github.fge.jsonschema.core.keyword.collectors.common.AdditionalItemsPointerCollector;
 import com.github.fge.jsonschema.core.keyword.collectors.common.AdditionalPropertiesPointerCollector;
 import com.github.fge.jsonschema.core.keyword.collectors.common.DependenciesPointerCollector;
 import com.github.fge.jsonschema.core.keyword.collectors.helpers.SchemaMapPointerCollector;
 import com.github.fge.jsonschema.core.keyword.collectors.helpers.SchemaOrSchemaArrayPointerCollector;
+import com.github.fge.jsonschema.core.util.Dictionary;
+import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 
 /**
  * Dictionary of pointer collectors common to both draft v4 and draft v3
