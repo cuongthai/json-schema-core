@@ -90,9 +90,6 @@ public final class Keyword
 
         public Keyword build()
         {
-            if (pointerCollector != null)
-                BUNDLE.checkArgument(syntaxChecker != null,
-                    "keywordDescriptor.illegal");
             return new Keyword(this);
         }
     }

@@ -70,19 +70,6 @@ public final class KeywordTest
     }
 
     @Test
-    public void mustHaveSyntaxCheckerWithPointerCollector()
-    {
-        try {
-            Keyword.withName("foo")
-                .setPointerCollector(mock(PointerCollector.class)).build();
-            fail("No exception thrown!");
-        } catch (IllegalArgumentException e) {
-            assertEquals(e.getMessage(),
-                BUNDLE.getMessage("keywordDescriptor.illegal"));
-        }
-    }
-
-    @Test
     public void descriptorElementsAreRetrievable()
     {
         final String name = "foo";
