@@ -25,6 +25,7 @@ import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jackson.jsonpointer.JsonPointer;
 import com.github.fge.jackson.jsonpointer.TokenResolver;
 import com.github.fge.jsonschema.core.exceptions.JsonReferenceException;
+import com.github.fge.jsonschema.core.misc.key.SchemaKey;
 import com.github.fge.jsonschema.core.ref.JsonRef;
 
 import javax.annotation.concurrent.Immutable;
@@ -41,6 +42,7 @@ public abstract class BaseSchemaTree
 {
     private static final JsonNodeFactory FACTORY = JacksonUtils.nodeFactory();
 
+    private final SchemaKey key;
     /**
      * The contents of {@code $schema} for that schema
      *
@@ -93,6 +95,7 @@ public abstract class BaseSchemaTree
         this.pointer = pointer;
         node = pointer.path(baseNode);
         this.loadingRef = loadingRef;
+        key = SchemaKey.absoluteKey(loadingRef);
 
         final JsonRef ref = idFromNode(baseNode);
 
@@ -107,6 +110,7 @@ public abstract class BaseSchemaTree
         dollarSchema = other.dollarSchema;
         baseNode = other.baseNode;
         loadingRef = other.loadingRef;
+        key = other.key;
 
         pointer = newPointer;
         node = newPointer.get(baseNode);
