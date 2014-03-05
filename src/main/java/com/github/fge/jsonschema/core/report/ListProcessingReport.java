@@ -18,7 +18,11 @@
 
 package com.github.fge.jsonschema.core.report;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.github.fge.jackson.JacksonUtils;
@@ -26,6 +30,7 @@ import com.github.fge.jsonschema.core.util.AsJson;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -76,9 +81,24 @@ public final class ListProcessingReport
     }
 
     @Override
+    public void serialize(final JsonGenerator jgen,
+        final SerializerProvider provider)
+        throws IOException, JsonProcessingException
+    {
+        jgen.writeObject(messages);
+    }
+
+    @Override
+    public void serializeWithType(final JsonGenerator jgen,
+        final SerializerProvider provider, final TypeSerializer typeSer)
+        throws IOException, JsonProcessingException
+    {
+        serialize(jgen, provider);
+    }
+
+    @Override
     public Iterator<ProcessingMessage> iterator()
     {
         return Iterators.unmodifiableIterator(messages.iterator());
     }
-
 }

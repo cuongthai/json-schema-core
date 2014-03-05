@@ -18,7 +18,11 @@
 
 package com.github.fge.jsonschema.core.tree;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jackson.JacksonUtils;
@@ -29,6 +33,7 @@ import com.github.fge.jsonschema.core.misc.key.SchemaKey;
 import com.github.fge.jsonschema.core.ref.JsonRef;
 
 import javax.annotation.concurrent.Immutable;
+import java.io.IOException;
 
 /**
  * Base implementation of a {@link SchemaTree}
@@ -187,6 +192,25 @@ public abstract class BaseSchemaTree
         ret.put("pointer", FACTORY.textNode(pointer.toString()));
 
         return ret;
+    }
+
+    @Override
+    public final void serialize(final JsonGenerator jgen,
+        final SerializerProvider provider)
+        throws IOException, JsonProcessingException
+    {
+        jgen.writeStartObject();
+        jgen.writeStringField("loadingURI", loadingRef.toString());
+        jgen.writeStringField("pointer", pointer.toString());
+        jgen.writeEndObject();
+    }
+
+    @Override
+    public final void serializeWithType(final JsonGenerator jgen,
+        final SerializerProvider provider, final TypeSerializer typeSer)
+        throws IOException, JsonProcessingException
+    {
+        serialize(jgen, provider);
     }
 
     @Override

@@ -18,10 +18,15 @@
 
 package com.github.fge.jsonschema.core.tree;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.github.fge.jackson.jsonpointer.JsonPointer;
 
 import javax.annotation.concurrent.Immutable;
+import java.io.IOException;
 
 /**
  * A simple {@link JsonTree}
@@ -51,6 +56,24 @@ public final class SimpleJsonTree
     {
         return FACTORY.objectNode()
             .set("pointer", FACTORY.textNode(pointer.toString()));
+    }
+
+    @Override
+    public void serialize(final JsonGenerator jgen,
+        final SerializerProvider provider)
+        throws IOException, JsonProcessingException
+    {
+        jgen.writeStartObject();
+        jgen.writeStringField("pointer", pointer.toString());
+        jgen.writeEndObject();
+    }
+
+    @Override
+    public void serializeWithType(final JsonGenerator jgen,
+        final SerializerProvider provider, final TypeSerializer typeSer)
+        throws IOException, JsonProcessingException
+    {
+        serialize(jgen, provider);
     }
 
     @Override

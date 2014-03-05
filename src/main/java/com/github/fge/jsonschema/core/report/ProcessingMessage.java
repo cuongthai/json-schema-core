@@ -18,7 +18,11 @@
 
 package com.github.fge.jsonschema.core.report;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.NullNode;
@@ -34,6 +38,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import javax.annotation.concurrent.NotThreadSafe;
+import java.io.IOException;
 import java.util.Formatter;
 import java.util.IllegalFormatException;
 import java.util.List;
@@ -410,6 +415,27 @@ public final class ProcessingMessage
         final ObjectNode ret = FACTORY.objectNode();
         ret.putAll(map);
         return ret;
+    }
+
+    @Override
+    public void serialize(final JsonGenerator jgen,
+        final SerializerProvider provider)
+        throws IOException, JsonProcessingException
+    {
+        jgen.writeStartObject();
+        for (final Map.Entry<String, JsonNode> entry: map.entrySet()) {
+            jgen.writeFieldName(entry.getKey());
+            jgen.writeTree(entry.getValue());
+        }
+        jgen.writeEndObject();
+    }
+
+    @Override
+    public void serializeWithType(final JsonGenerator jgen,
+        final SerializerProvider provider, final TypeSerializer typeSer)
+        throws IOException, JsonProcessingException
+    {
+        serialize(jgen, provider);
     }
 
     /**

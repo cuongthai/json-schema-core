@@ -19,6 +19,7 @@
 package com.github.fge.jsonschema.core.util;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JsonSerializable;
 import com.github.fge.jsonschema.core.tree.SchemaTree;
 
 /**
@@ -29,11 +30,14 @@ import com.github.fge.jsonschema.core.tree.SchemaTree;
  * characteristics (loading URI, current pointer).</p>
  */
 public interface AsJson
+    extends JsonSerializable
 {
     /**
      * Return a JSON representation of this object
      *
      * @return a {@link JsonNode}
+     * @deprecated implement {@link JsonSerializable} instead
      */
+    @Deprecated
     JsonNode asJson();
 }
