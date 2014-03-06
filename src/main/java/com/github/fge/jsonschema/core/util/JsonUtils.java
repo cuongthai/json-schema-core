@@ -33,11 +33,20 @@ public final class JsonUtils
     {
     }
 
+    public static JsonNode toJson(final JsonSerializable o)
+    {
+        return MAPPER.valueToTree(o);
+    }
+
+
     public static JsonNode toJson(final Object o)
     {
-        if (o instanceof JsonSerializable)
-            return MAPPER.valueToTree(o);
         return FACTORY.objectNode()
             .put("javaClass", o.getClass().getCanonicalName());
+    }
+
+    public static JsonNode toString(final Object o)
+    {
+        return FACTORY.textNode(o.toString());
     }
 }
