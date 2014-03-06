@@ -22,7 +22,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.JsonSerializable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.NullNode;
 import com.github.fge.jackson.JacksonUtils;
+
+import javax.annotation.Nullable;
 
 public final class JsonUtils
 {
@@ -33,20 +36,21 @@ public final class JsonUtils
     {
     }
 
-    public static JsonNode toJson(final JsonSerializable o)
+    public static JsonNode toJson(@Nullable final JsonSerializable o)
     {
-        return MAPPER.valueToTree(o);
+        return o == null ? NullNode.getInstance() : MAPPER.valueToTree(o);
     }
 
 
-    public static JsonNode toJson(final Object o)
+    public static JsonNode toJson(@Nullable final Object o)
     {
-        return FACTORY.objectNode()
+        return o == null ? NullNode.getInstance() : FACTORY.objectNode()
             .put("javaClass", o.getClass().getCanonicalName());
     }
 
-    public static JsonNode toString(final Object o)
+    public static JsonNode toString(@Nullable final Object o)
     {
-        return FACTORY.textNode(o.toString());
+        return o == null ? NullNode.getInstance()
+            : FACTORY.textNode(o.toString());
     }
 }
