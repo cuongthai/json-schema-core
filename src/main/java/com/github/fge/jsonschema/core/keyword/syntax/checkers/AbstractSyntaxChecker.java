@@ -139,7 +139,7 @@ public abstract class AbstractSyntaxChecker
      * @param bundle the message bundle to use
      * @param key the message
      * @return a new {@link ProcessingMessage}
-     * @see ProcessingMessage#message(Object)
+     * @see ProcessingMessage#setMessage(String)
      */
     protected final ProcessingMessage newMsg(final SchemaTree tree,
         final MessageBundle bundle, final String key)
