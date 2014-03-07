@@ -36,16 +36,13 @@ public final class JsonUtils
     {
     }
 
-    public static JsonNode toJson(@Nullable final JsonSerializable o)
-    {
-        return o == null ? NullNode.getInstance() : MAPPER.valueToTree(o);
-    }
-
-
     public static JsonNode toJson(@Nullable final Object o)
     {
-        return o == null ? NullNode.getInstance() : FACTORY.objectNode()
-            .put("javaClass", o.getClass().getCanonicalName());
+        if (o == null)
+            return NullNode.getInstance();
+        return o instanceof JsonSerializable ? MAPPER.valueToTree(o)
+            : FACTORY.objectNode().put("javaClass", o.getClass()
+                .getCanonicalName());
     }
 
     public static JsonNode toString(@Nullable final Object o)
