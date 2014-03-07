@@ -123,7 +123,8 @@ public final class ProcessingMessageTest
     public void settingAnyJsonNodeWorks()
     {
         final JsonNode foo = FACTORY.booleanNode(true);
-        final ProcessingMessage msg = new ProcessingMessage().put("foo", foo);
+        final ProcessingMessage msg = new ProcessingMessage()
+            .putRaw("foo", foo);
 
         assertMessage(msg).hasField("foo", foo);
     }
@@ -135,7 +136,8 @@ public final class ProcessingMessageTest
         foo.put("a", "b");
         final JsonNode node = foo.deepCopy();
 
-        final ProcessingMessage msg = new ProcessingMessage().put("foo", foo);
+        final ProcessingMessage msg = new ProcessingMessage()
+            .putRaw("foo", foo);
         foo.remove("a");
 
         assertMessage(msg).hasField("foo", node);
@@ -144,8 +146,8 @@ public final class ProcessingMessageTest
     @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
     public void settingNullJsonNodeSetsNullNode()
     {
-        final JsonNode node = null;
-        final ProcessingMessage msg = new ProcessingMessage().put("foo", node);
+        final ProcessingMessage msg = new ProcessingMessage()
+            .putRaw("foo", null);
 
         assertMessage(msg).hasNullField("foo");
     }

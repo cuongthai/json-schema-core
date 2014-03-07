@@ -32,6 +32,7 @@ import com.github.fge.jsonschema.core.exceptions.ExceptionProvider;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.messages.JsonSchemaCoreMessageBundle;
 import com.github.fge.jsonschema.core.util.AsJson;
+import com.github.fge.jsonschema.core.util.JsonUtils;
 import com.github.fge.msgsimple.bundle.MessageBundle;
 import com.github.fge.msgsimple.load.MessageBundles;
 import com.google.common.collect.Lists;
@@ -182,13 +183,43 @@ public final class ProcessingMessage
      *
      * <p>This is the main method. All other put methods call this one.</p>
      *
+     * <p>Notes:</p>
+     *
+     * <ul>
+     *     <li>if {@code key} is {@code null}, the key/value pair will be
+     *     discarded silently;</li>
+     *     <li>if {@code value} is {@code null}, a null JSON value will be
+     *     added.</li>
+     * </ul>
+     *
+     * @param key the key
+     * @param value the value as a {@link JsonNode}
+     * @return this
+     * @since 1.1.10
+     */
+    public ProcessingMessage putRaw(final String key, final JsonNode value)
+    {
+        if (key == null)
+            return this;
+        if (value == null)
+            return putNull(key);
+        map.put(key, value.deepCopy());
+        return this;
+    }
+
+    /**
+     * Add a key/value pair to this message
+     *
      * <p>Note that if the key is {@code null}, the content is <b>ignored</b>.
      * </p>
      *
      * @param key the key
      * @param value the value as a {@link JsonNode}
      * @return this
+     * @deprecated use {@link #putRaw(String, JsonNode)} instead; will be
+     * removed in 1.1.11.
      */
+    @Deprecated
     public ProcessingMessage put(final String key, final JsonNode value)
     {
         if (key == null)
@@ -209,7 +240,7 @@ public final class ProcessingMessage
     public ProcessingMessage putArgument(final String key, final JsonNode value)
     {
         addArgument(key, value);
-        return put(key, value);
+        return putRaw(key, value);
     }
 
     /**
@@ -246,7 +277,8 @@ public final class ProcessingMessage
      */
     public ProcessingMessage put(final String key, final String value)
     {
-        return value == null ? putNull(key) : put(key, FACTORY.textNode(value));
+        return value == null ? putNull(key)
+            : putRaw(key, FACTORY.textNode(value));
     }
 
     /**
@@ -258,7 +290,7 @@ public final class ProcessingMessage
      */
     public ProcessingMessage put(final String key, final int value)
     {
-        return put(key, FACTORY.numberNode(value));
+        return putRaw(key, FACTORY.numberNode(value));
     }
 
     /**
@@ -286,7 +318,7 @@ public final class ProcessingMessage
     {
         return value == null
             ? putNull(key)
-            : put(key, FACTORY.textNode(value.toString()));
+            : putRaw(key, FACTORY.textNode(value.toString()));
     }
 
     /**
@@ -324,7 +356,7 @@ public final class ProcessingMessage
             node.add(value == null
                 ? FACTORY.nullNode()
                 : FACTORY.textNode(value.toString()));
-        return put(key, node);
+        return putRaw(key, node);
     }
 
     /**

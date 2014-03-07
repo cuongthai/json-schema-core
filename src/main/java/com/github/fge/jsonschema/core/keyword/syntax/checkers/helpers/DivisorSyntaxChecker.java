@@ -53,6 +53,6 @@ public final class DivisorSyntaxChecker
 
         if (divisor.compareTo(BigDecimal.ZERO) <= 0)
             report.error(newMsg(tree, bundle, "common.divisor.notPositive")
-                .put("found", node));
+                .putRaw("found", node));
     }
 }
