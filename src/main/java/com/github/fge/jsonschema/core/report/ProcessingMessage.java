@@ -210,6 +210,35 @@ public final class ProcessingMessage
     /**
      * Add a key/value pair to this message
      *
+     * <p>This will use {@link JsonUtils} to attempt to serialize the value to a
+     * {@link JsonNode} using Jackson serialization.</p>
+     *
+     * <p>Notes:</p>
+     *
+     * <ul>
+     *     <li>if {@code key} is {@code null}, the key/value pair will be
+     *     discarded silently;</li>
+     *     <li>if {@code value} is {@code null}, a null JSON value will be
+     *     added.</li>
+     * </ul>
+     *
+     * @param key the key
+     * @param o the object
+     * @return this
+     * @since 1.1.10
+     */
+    public ProcessingMessage putSerialized(final String key, final Object o)
+    {
+        if (key != null)
+            map.put(key, JsonUtils.toJson(o));
+        return this;
+    }
+
+    /**
+     * Add a key/value pair to this message
+     *
+     * <p>This is the main method. All other put methods call this one.</p>
+     *
      * <p>Note that if the key is {@code null}, the content is <b>ignored</b>.
      * </p>
      *
@@ -249,10 +278,13 @@ public final class ProcessingMessage
      * @param key the key
      * @param asJson the value, which implements {@link AsJson}
      * @return this
+     * @deprecated use {@link #putSerialized(String, Object)} instead; will be
+     * removed in 1.1.11.
      */
+    @Deprecated
     public ProcessingMessage put(final String key, final AsJson asJson)
     {
-        return put(key, asJson.asJson());
+        return putSerialized(key, asJson);
     }
 
     /**
@@ -264,8 +296,8 @@ public final class ProcessingMessage
      */
     public ProcessingMessage putArgument(final String key, final AsJson asJson)
     {
-        addArgument(key, asJson.asJson());
-        return put(key, asJson);
+        addArgument(key, JsonUtils.toJson(asJson));
+        return putSerialized(key, asJson);
     }
 
     /**

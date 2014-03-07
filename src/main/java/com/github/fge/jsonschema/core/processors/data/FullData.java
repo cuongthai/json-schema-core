@@ -89,9 +89,9 @@ public final class FullData
     {
         final ProcessingMessage ret = new ProcessingMessage();
         if (schema != null)
-            ret.put("schema", schema);
+            ret.putSerialized("schema", schema);
         if (instance != null)
-            ret.put("instance", instance);
+            ret.putSerialized("instance", instance);
         return ret;
     }
 }

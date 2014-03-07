@@ -145,7 +145,8 @@ public abstract class AbstractSyntaxChecker
         final MessageBundle bundle, final String key)
     {
         return new ProcessingMessage().setMessage(bundle.getMessage(key))
-            .put("domain", "syntax").put("schema", tree).put("keyword", keyword)
+            .put("domain", "syntax")
+            .putSerialized("schema", tree).put("keyword", keyword)
             .setExceptionProvider(EXCEPTION_PROVIDER);
     }
 

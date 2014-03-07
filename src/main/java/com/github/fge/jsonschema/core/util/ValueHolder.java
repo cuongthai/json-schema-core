@@ -101,6 +101,6 @@ public final class ValueHolder<T>
     @Override
     public ProcessingMessage newMessage()
     {
-        return new ProcessingMessage().put(name, JsonUtils.toJson(value));
+        return new ProcessingMessage().putSerialized(name, value);
     }
 }

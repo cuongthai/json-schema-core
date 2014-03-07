@@ -100,7 +100,7 @@ public final class RefResolver
             if (!refs.add(ref))
                 throw new ProcessingException(new ProcessingMessage()
                     .setMessage(BUNDLE.getMessage("refProcessing.refLoop"))
-                    .put("schema", tree).putArgument("ref", ref)
+                    .putSerialized("schema", tree).putArgument("ref", ref)
                     .put("path", refs));
             /*
              * Check whether ref is resolvable within the current tree. If not,
@@ -119,7 +119,7 @@ public final class RefResolver
             if (ptr == null)
                 throw new ProcessingException(new ProcessingMessage()
                     .setMessage(BUNDLE.getMessage("refProcessing.danglingRef"))
-                    .put("schema", tree).putArgument("ref", ref));
+                    .putSerialized("schema", tree).putArgument("ref", ref));
             tree = tree.setPointer(ptr);
         }
 
