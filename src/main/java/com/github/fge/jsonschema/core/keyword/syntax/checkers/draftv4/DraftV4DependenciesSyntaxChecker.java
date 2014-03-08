@@ -74,7 +74,7 @@ public final class DraftV4DependenciesSyntaxChecker
 
         if (size == 0) {
             report.error(newMsg(tree, bundle, "common.array.empty")
-                .put("property", name));
+                .putString("property", name));
             return;
         }
 
@@ -91,13 +91,13 @@ public final class DraftV4DependenciesSyntaxChecker
                 continue;
             report.error(newMsg(tree, bundle,
                 "common.array.element.incorrectType")
-                .put("property", name).putArgument("index", index)
+                .putString("property", name).putArgument("index", index)
                 .putArgument("expected", EnumSet.of(NodeType.STRING))
                 .putArgument("found", type));
         }
 
         if (!uniqueElements)
             report.error(newMsg(tree, bundle, "common.array.duplicateElements")
-                .put("property", name));
+                .putString("property", name));
     }
 }

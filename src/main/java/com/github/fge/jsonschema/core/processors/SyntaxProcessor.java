@@ -114,7 +114,7 @@ public final class SyntaxProcessor
     private ProcessingMessage newMsg(final SchemaTree tree, final String key)
     {
         return new ProcessingMessage().put("schema", tree)
-            .put("domain", "syntax").setMessage(bundle.getMessage(key));
+            .putString("domain", "syntax").setMessage(bundle.getMessage(key));
 
     }
 

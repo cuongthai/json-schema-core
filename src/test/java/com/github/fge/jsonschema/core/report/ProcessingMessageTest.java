@@ -87,7 +87,8 @@ public final class ProcessingMessageTest
     @Test
     public void settingStringFieldWorks()
     {
-        final ProcessingMessage msg = new ProcessingMessage().put("foo", "bar");
+        final ProcessingMessage msg = new ProcessingMessage()
+            .putString("foo", "bar");
 
         assertMessage(msg).hasField("foo", "bar");
     }
@@ -96,7 +97,7 @@ public final class ProcessingMessageTest
     public void settingNullStringSetsNullNode()
     {
         final ProcessingMessage msg = new ProcessingMessage()
-            .put("foo", (String) null);
+            .putString("foo", null);
 
         assertMessage(msg).hasNullField("foo");
     }
