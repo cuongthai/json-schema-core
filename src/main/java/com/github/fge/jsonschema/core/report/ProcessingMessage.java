@@ -197,7 +197,7 @@ public final class ProcessingMessage
      * @return this
      * @since 1.1.10
      */
-    public ProcessingMessage putRaw(final String key, final JsonNode value)
+    public ProcessingMessage putJson(final String key, final JsonNode value)
     {
         if (key == null)
             return this;
@@ -274,7 +274,7 @@ public final class ProcessingMessage
      * @param key the key
      * @param value the value as a {@link JsonNode}
      * @return this
-     * @deprecated use {@link #putRaw(String, JsonNode)} instead; will be
+     * @deprecated use {@link #putJson(String, JsonNode)} instead; will be
      * removed in 1.1.11.
      */
     @Deprecated
@@ -298,7 +298,7 @@ public final class ProcessingMessage
     public ProcessingMessage putArgument(final String key, final JsonNode value)
     {
         addArgument(key, value);
-        return putRaw(key, value);
+        return putJson(key, value);
     }
 
     /**
@@ -322,7 +322,9 @@ public final class ProcessingMessage
      * @param key the key
      * @param asJson the value
      * @return this
+     * @deprecated will be removed in 1.1.11.
      */
+    @Deprecated
     public ProcessingMessage putArgument(final String key, final AsJson asJson)
     {
         addArgument(key, JsonUtils.toJson(asJson));
@@ -342,7 +344,7 @@ public final class ProcessingMessage
     public ProcessingMessage put(final String key, final String value)
     {
         return value == null ? putNull(key)
-            : putRaw(key, FACTORY.textNode(value));
+            : putJson(key, FACTORY.textNode(value));
     }
 
     /**
@@ -354,7 +356,7 @@ public final class ProcessingMessage
      */
     public ProcessingMessage put(final String key, final int value)
     {
-        return putRaw(key, FACTORY.numberNode(value));
+        return putJson(key, FACTORY.numberNode(value));
     }
 
     /**
@@ -382,7 +384,7 @@ public final class ProcessingMessage
     {
         return value == null
             ? putNull(key)
-            : putRaw(key, FACTORY.textNode(value.toString()));
+            : putJson(key, FACTORY.textNode(value.toString()));
     }
 
     /**
@@ -420,7 +422,7 @@ public final class ProcessingMessage
             node.add(value == null
                 ? FACTORY.nullNode()
                 : FACTORY.textNode(value.toString()));
-        return putRaw(key, node);
+        return putJson(key, node);
     }
 
     /**
