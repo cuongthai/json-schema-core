@@ -143,8 +143,7 @@ public final class ProcessingResult<R extends MessageProvider>
             = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
         try {
             ret.fatal(e.getProcessingMessage()
-                .putString("info",
-                    BUNDLE.getMessage("processing.moreMessages")));
+                .put("info", BUNDLE.getMessage("processing.moreMessages")));
             ret.mergeWith(report);
         } catch (ProcessingException ignored) {
             // can't happen

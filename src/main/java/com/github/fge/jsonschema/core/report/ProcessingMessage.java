@@ -145,7 +145,7 @@ public final class ProcessingMessage
     public ProcessingMessage setMessage(final String message)
     {
         args.clear();
-        return putString("message", message);
+        return put("message", message);
     }
 
     /**
@@ -237,35 +237,6 @@ public final class ProcessingMessage
     /**
      * Add a key/value pair to this message
      *
-     * <p>This will use {@link JsonUtils#toString(Object)}; that is, any
-     * argument to this method will be converted to a JSON String by calling
-     * this argument's {@link Object#toString()}.</p>
-     *
-     * <p>Notes:</p>
-     *
-     * <ul>
-     *     <li>if {@code key} is {@code null}, the key/value pair will be
-     *     discarded silently;</li>
-     *     <li>if {@code value} is {@code null}, a null JSON value will be
-     *     added.</li>
-     * </ul>
-     *
-     * @param key the key
-     * @param o the object
-     * @return this
-     * @since 1.1.10
-     */
-    public ProcessingMessage putString(final String key, final Object o)
-    {
-        if (key != null)
-            map.put(key, o == null ? NullNode.getInstance()
-                : JsonUtils.toString(o));
-        return this;
-    }
-
-    /**
-     * Add a key/value pair to this message
-     *
      * <p>This is the main method. All other put methods call this one.</p>
      *
      * <p>Note that if the key is {@code null}, the content is <b>ignored</b>.
@@ -335,22 +306,6 @@ public final class ProcessingMessage
      * Add a key/value pair to this message
      *
      * @param key the key
-     * @param value the value
-     * @return this
-     * @deprecated use {@link #putString(String, Object)} instead; will be
-     * removed in 1.1.11.
-     */
-    @Deprecated
-    public ProcessingMessage put(final String key, final String value)
-    {
-        return value == null ? putNull(key)
-            : putJson(key, FACTORY.textNode(value));
-    }
-
-    /**
-     * Add a key/value pair to this message
-     *
-     * @param key the key
      * @param value the value as an integer
      * @return this
      */
@@ -377,14 +332,12 @@ public final class ProcessingMessage
      *
      * @param key the key
      * @param value the value
-     * @param <T> the type of the value
      * @return this
      */
-    public <T> ProcessingMessage put(final String key, final T value)
+    public ProcessingMessage put(final String key, final Object value)
     {
-        return value == null
-            ? putNull(key)
-            : putJson(key, FACTORY.textNode(value.toString()));
+        return putJson(key, value == null ? NullNode.getInstance()
+            : JsonUtils.toString(value));
     }
 
     /**

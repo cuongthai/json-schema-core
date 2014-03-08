@@ -103,12 +103,12 @@ public final class URIManager
             throw new ProcessingException(new ProcessingMessage()
                 .setMessage(BUNDLE.getMessage("refProcessing.uriNotJson"))
                 .putArgument("uri", uri)
-                .putString("parsingMessage", e.getOriginalMessage()));
+                .put("parsingMessage", e.getOriginalMessage()));
         } catch (IOException e) {
             throw new ProcessingException(new ProcessingMessage()
                 .setMessage(BUNDLE.getMessage("refProcessing.uriIOError"))
                 .putArgument("uri", uri)
-                .putString("exceptionMessage", e.getMessage()));
+                .put("exceptionMessage", e.getMessage()));
         }
     }
 }
