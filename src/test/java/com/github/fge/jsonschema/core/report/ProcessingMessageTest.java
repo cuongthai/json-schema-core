@@ -72,7 +72,8 @@ public final class ProcessingMessageTest
             msg.setLogLevel(null);
             fail("No exception thrown!");
         } catch (NullPointerException e) {
-            assertEquals(e.getMessage(), BUNDLE.getMessage("processing.nullLevel"));
+            assertEquals(e.getMessage(),
+                BUNDLE.getMessage("processing.nullLevel"));
         }
     }
 
