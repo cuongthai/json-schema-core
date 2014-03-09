@@ -85,6 +85,19 @@ public final class ProcessingMessageTest
     }
 
     @Test
+    public void cannotPutJsonWithNullKey()
+    {
+        try {
+            new ProcessingMessage().putJson(null, null);
+            fail("No exception thrown!");
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(),
+                BUNDLE.getMessage("processingMessage.nullKey"));
+        }
+    }
+
+
+    @Test
     public void settingStringFieldWorks()
     {
         final ProcessingMessage msg = new ProcessingMessage()

@@ -199,8 +199,7 @@ public final class ProcessingMessage
      */
     public ProcessingMessage putJson(final String key, final JsonNode value)
     {
-        if (key == null)
-            return this;
+        BUNDLE.checkNotNull(key, "processingMessage.nullKey");
         if (value == null)
             return putNull(key);
         map.put(key, value.deepCopy());
