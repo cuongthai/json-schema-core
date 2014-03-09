@@ -26,6 +26,7 @@ import com.github.fge.jsonschema.core.report.LogLevel;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.tree.SchemaTree;
 import com.github.fge.jsonschema.core.util.AsJson;
+import com.github.fge.jsonschema.core.util.JsonUtils;
 import org.fest.assertions.GenericAssert;
 
 import java.util.Collection;
@@ -54,7 +55,7 @@ public final class ProcessingMessageAssert
     /*
      * Simple asserts
      */
-    public ProcessingMessageAssert hasField(final String name,
+    public ProcessingMessageAssert hasJsonField(final String name,
         final JsonNode value)
     {
         assertThat(msg.has(name)).isTrue();
@@ -65,9 +66,9 @@ public final class ProcessingMessageAssert
     }
 
     public ProcessingMessageAssert hasField(final String name,
-        final AsJson asJson)
+        final AsJson value)
     {
-        return hasField(name, asJson.asJson());
+        return hasJsonField(name, JsonUtils.toJson(value));
     }
 
     // FIXME: for some reason, I have to declare an Integer here, int won't work

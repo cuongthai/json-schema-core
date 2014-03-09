@@ -159,7 +159,7 @@ public final class SyntaxProcessorTest
 
         final ProcessingMessage message = captor.getValue();
 
-        assertMessage(message).hasField("ignored", ignored)
+        assertMessage(message).hasJsonField("ignored", ignored)
             .hasMessage(BUNDLE.printf("core.unknownKeywords", iterable));
     }
 

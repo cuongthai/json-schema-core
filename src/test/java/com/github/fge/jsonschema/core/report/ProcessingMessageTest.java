@@ -44,6 +44,7 @@ public final class ProcessingMessageTest
         = MessageBundles.getBundle(JsonSchemaCoreMessageBundle.class);
 
     private static final JsonNodeFactory FACTORY = JacksonUtils.nodeFactory();
+    private static final String FOO_TOSTRING = "I am foo";
 
     @Test
     public void defaultLogLevelIsInfo()
@@ -122,7 +123,7 @@ public final class ProcessingMessageTest
         final JsonNode node = FACTORY.textNode(foo.toString());
         final ProcessingMessage msg = new ProcessingMessage().put("foo", foo);
 
-        assertMessage(msg).hasField("foo", node);
+        assertMessage(msg).hasJsonField("foo", node);
     }
 
     @Test(dependsOnMethods = "settingAnyObjectSetsToString")
@@ -141,7 +142,7 @@ public final class ProcessingMessageTest
         final ProcessingMessage msg = new ProcessingMessage()
             .putJson("foo", foo);
 
-        assertMessage(msg).hasField("foo", foo);
+        assertMessage(msg).hasJsonField("foo", foo);
     }
 
     @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
@@ -155,7 +156,7 @@ public final class ProcessingMessageTest
             .putJson("foo", foo);
         foo.remove("a");
 
-        assertMessage(msg).hasField("foo", node);
+        assertMessage(msg).hasJsonField("foo", node);
     }
 
     @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
@@ -177,7 +178,7 @@ public final class ProcessingMessageTest
 
         final ProcessingMessage msg = new ProcessingMessage().put("foo", list);
 
-        assertMessage(msg).hasField("foo", node);
+        assertMessage(msg).hasJsonField("foo", node);
     }
 
     @Test(dependsOnMethods = "submittedCollectionAppliesToStringToElements")
@@ -201,7 +202,7 @@ public final class ProcessingMessageTest
 
         final ProcessingMessage msg = new ProcessingMessage().put("foo", list);
 
-        assertMessage(msg).hasField("foo", node);
+        assertMessage(msg).hasJsonField("foo", node);
     }
 
     @Test
@@ -284,6 +285,12 @@ public final class ProcessingMessageTest
         private Foo(final ProcessingMessage message)
         {
             super(message);
+        }
+
+        @Override
+        public String toString()
+        {
+            return FOO_TOSTRING;
         }
     }
 }
