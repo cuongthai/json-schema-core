@@ -1,3 +1,9 @@
+### master
+
+* API change in `ProcessingMessage`.
+* Start and deprecate `AsJson`.
+* Remove some dead code.
+
 ### 1.1.9
 
 * Change license (dual licensing LGPL 3.0/ASL 2.0).
