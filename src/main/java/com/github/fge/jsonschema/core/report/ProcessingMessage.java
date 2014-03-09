@@ -207,6 +207,48 @@ public final class ProcessingMessage
     }
 
     /**
+     * Add a key/value pair to this message, which is also a formatter argument
+     *
+     * @param key the key
+     * @param value the value
+     * @return this
+     */
+    public ProcessingMessage putArgument(final String key, final JsonNode value)
+    {
+        addArgument(value);
+        return putJson(key, value);
+    }
+
+
+    /**
+     * Add a key/value pair to this message
+     *
+     * <p>{@link Object#toString()} will be called on the value.</p>
+     *
+     * @param key the key
+     * @param value the value
+     * @return this
+     */
+    public ProcessingMessage put(final String key, final Object value)
+    {
+        return putJson(key, value == null ? NullNode.getInstance()
+            : JsonUtils.toString(value));
+    }
+
+    /**
+     * Add a key/value pair to this message, which is also a formatter argument
+     *
+     * @param key the key
+     * @param value the value
+     * @return this
+     */
+    public ProcessingMessage putArgument(final String key, final Object value)
+    {
+        addArgument(value);
+        return put(key, value);
+    }
+
+    /**
      * Add a key/value pair to this message
      *
      * <p>This will use {@link JsonUtils} to attempt to serialize the value to a
@@ -259,19 +301,6 @@ public final class ProcessingMessage
     }
 
     /**
-     * Add a key/value pair to this message, which is also a formatter argument
-     *
-     * @param key the key
-     * @param value the value
-     * @return this
-     */
-    public ProcessingMessage putArgument(final String key, final JsonNode value)
-    {
-        addArgument(key, value);
-        return putJson(key, value);
-    }
-
-    /**
      * Add a key/value pair to this message
      *
      * @param key the key
@@ -297,7 +326,7 @@ public final class ProcessingMessage
     @Deprecated
     public ProcessingMessage putArgument(final String key, final AsJson asJson)
     {
-        addArgument(key, JsonUtils.toJson(asJson));
+        addArgument(JsonUtils.toJson(asJson));
         return putSerialized(key, asJson);
     }
 
@@ -322,34 +351,7 @@ public final class ProcessingMessage
      */
     public ProcessingMessage putArgument(final String key, final int value)
     {
-        addArgument(key, value);
-        return put(key, value);
-    }
-
-    /**
-     * Add a key/value pair to this message
-     *
-     * @param key the key
-     * @param value the value
-     * @return this
-     */
-    public ProcessingMessage put(final String key, final Object value)
-    {
-        return putJson(key, value == null ? NullNode.getInstance()
-            : JsonUtils.toString(value));
-    }
-
-    /**
-     * Add a key/value pair to this message, which is also a formatter argument
-     *
-     * @param key the key
-     * @param value the value
-     * @param <T> the type of the value
-     * @return this
-     */
-    public <T> ProcessingMessage putArgument(final String key, final T value)
-    {
-        addArgument(key, value);
+        addArgument(value);
         return put(key, value);
     }
 
@@ -390,16 +392,15 @@ public final class ProcessingMessage
     public <T> ProcessingMessage putArgument(final String key,
         final Iterable<T> values)
     {
-        addArgument(key, values);
+        addArgument(values);
         return put(key, values);
     }
 
-    private void addArgument(final String key, final Object value)
+    private void addArgument(final Object value)
     {
-        if (key != null)
-            args.add(value);
         if (!map.containsKey("message"))
             return;
+        args.add(value);
         final String fmt = map.get("message").textValue();
         try {
             final String formatted = new Formatter()
