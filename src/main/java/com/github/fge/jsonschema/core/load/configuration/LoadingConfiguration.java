@@ -32,8 +32,6 @@ import com.github.fge.jsonschema.core.load.download.URIDownloader;
 import com.github.fge.jsonschema.core.load.uri.URITranslatorConfiguration;
 import com.github.fge.jsonschema.core.tree.CanonicalSchemaTree;
 import com.github.fge.jsonschema.core.tree.InlineSchemaTree;
-import com.github.fge.jsonschema.core.util.Dictionary;
-import com.github.fge.jsonschema.core.util.DictionaryBuilder;
 import com.google.common.collect.ImmutableMap;
 
 import java.net.URI;
@@ -77,7 +75,8 @@ public final class LoadingConfiguration
     final URITranslatorConfiguration translatorCfg;
     
     /**
-     * If we have to cache loaded schemas, note that this do not affect preloadedSchema that are always cached
+     * If we have to cache loaded schemas, note that this do not affect
+     * preloaded schemas which are always cached.
      */
     final boolean enableCache;
 
@@ -171,27 +170,6 @@ public final class LoadingConfiguration
         for (final JsonParser.Feature feature : parserFeatures)
             mapper.configure(feature, true);
         return mapper.reader();
-    }
-
-    /**
-     * Return the dictionary of URI downloaders
-     *
-     * @return an immutable {@link Dictionary}
-     *
-     * @deprecated use {@link #getDownloaderMap()} instead. Will disappear in
-     * 1.1.10.
-     */
-    @Deprecated
-    public Dictionary<URIDownloader> getDownloaders()
-    {
-        final DictionaryBuilder<URIDownloader> builder
-            = Dictionary.newBuilder();
-
-        for (final Map.Entry<String, URIDownloader> entry:
-            downloaders.entrySet())
-            builder.addEntry(entry.getKey(), entry.getValue());
-
-        return builder.freeze();
     }
 
     /**
