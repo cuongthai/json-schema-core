@@ -31,6 +31,7 @@ import com.github.fge.msgsimple.load.MessageBundles;
 import com.google.common.collect.Lists;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -97,25 +98,52 @@ public final class ProcessingMessageTest
         }
     }
 
-    @Test
-    public void settingStringFieldWorks()
+    @Test(dependsOnMethods = "cannotPutJsonWithNullKey")
+    public void settingAnyJsonNodeWorks()
     {
+        final JsonNode foo = FACTORY.booleanNode(true);
         final ProcessingMessage msg = new ProcessingMessage()
-            .put("foo", "bar");
+            .putJson("foo", foo);
 
-        assertMessage(msg).hasField("foo", "bar");
+        assertMessage(msg).hasJsonField("foo", foo);
     }
 
-    @Test(dependsOnMethods = "settingStringFieldWorks")
-    public void settingNullStringSetsNullNode()
+    @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
+    public void settingNullJsonNodeSetsNullNode()
     {
-        final String value = (String) null;
-        final ProcessingMessage msg = new ProcessingMessage().put("foo", value);
+        final ProcessingMessage msg = new ProcessingMessage()
+            .putJson("foo", null);
 
         assertMessage(msg).hasNullField("foo");
     }
 
+    @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
+    public void nodesAreUnalteredWhenSubmitted()
+    {
+        final ObjectNode foo = FACTORY.objectNode();
+        foo.put("a", "b");
+        final JsonNode node = foo.deepCopy();
+
+        final ProcessingMessage msg = new ProcessingMessage()
+            .putJson("foo", foo);
+        foo.remove("a");
+
+        assertMessage(msg).hasJsonField("foo", node);
+    }
+
     @Test
+    public void cannotAddObjectWithNullKey()
+    {
+        try {
+            new ProcessingMessage().put(null, new Object());
+            fail("No exception thrown!");
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(),
+                BUNDLE.getMessage("processingMessage.nullKey"));
+        }
+    }
+
+    @Test(dependsOnMethods = "cannotAddObjectWithNullKey")
     public void settingAnyObjectSetsToString()
     {
         final Object foo = new Object();
@@ -135,39 +163,18 @@ public final class ProcessingMessageTest
     }
 
     @Test
-    public void settingAnyJsonNodeWorks()
+    public void cannotAddNewCollectionWithNullKey()
     {
-        final JsonNode foo = FACTORY.booleanNode(true);
-        final ProcessingMessage msg = new ProcessingMessage()
-            .putJson("foo", foo);
-
-        assertMessage(msg).hasJsonField("foo", foo);
+        try {
+            new ProcessingMessage().put(null, new ArrayList<Object>());
+            fail("No exception thrown!");
+        } catch (NullPointerException e) {
+            assertEquals(e.getMessage(),
+                BUNDLE.getMessage("processingMessage.nullKey"));
+        }
     }
 
-    @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
-    public void nodesAreUnalteredWhenSubmitted()
-    {
-        final ObjectNode foo = FACTORY.objectNode();
-        foo.put("a", "b");
-        final JsonNode node = foo.deepCopy();
-
-        final ProcessingMessage msg = new ProcessingMessage()
-            .putJson("foo", foo);
-        foo.remove("a");
-
-        assertMessage(msg).hasJsonField("foo", node);
-    }
-
-    @Test(dependsOnMethods = "settingAnyJsonNodeWorks")
-    public void settingNullJsonNodeSetsNullNode()
-    {
-        final ProcessingMessage msg = new ProcessingMessage()
-            .putJson("foo", null);
-
-        assertMessage(msg).hasNullField("foo");
-    }
-
-    @Test
+    @Test(dependsOnMethods = "cannotAddNewCollectionWithNullKey")
     public void submittedCollectionAppliesToStringToElements()
     {
         final List<Object> list = Arrays.asList(new Object(), new Object());

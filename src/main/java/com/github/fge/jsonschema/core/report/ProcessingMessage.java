@@ -270,9 +270,7 @@ public final class ProcessingMessage
      */
     public ProcessingMessage putSerialized(final String key, final Object o)
     {
-        if (key != null)
-            map.put(key, JsonUtils.toJson(o));
-        return this;
+        return putJson(key, JsonUtils.toJson(o));
     }
 
     /**
@@ -420,8 +418,6 @@ public final class ProcessingMessage
      */
     private ProcessingMessage putNull(final String key)
     {
-        if (key == null)
-            return this;
         map.put(key, FACTORY.nullNode());
         return this;
     }
