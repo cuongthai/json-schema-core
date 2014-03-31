@@ -36,7 +36,6 @@ import com.github.fge.jsonschema.core.util.JsonUtils;
 import com.github.fge.msgsimple.bundle.MessageBundle;
 import com.github.fge.msgsimple.load.MessageBundles;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.io.IOException;
@@ -89,7 +88,7 @@ public final class ProcessingMessage
     /**
      * This is where all key/value pairs go
      */
-    private final Map<String, JsonNode> map = Maps.newLinkedHashMap();
+    private final ObjectNode map = FACTORY.objectNode();
 
     /**
      * Argument list for Formatter
@@ -122,7 +121,7 @@ public final class ProcessingMessage
      */
     public String getMessage()
     {
-        return map.containsKey("message") ? map.get("message").textValue()
+        return map.has("message") ? map.get("message").textValue()
             : "(no message)";
     }
 
@@ -396,7 +395,7 @@ public final class ProcessingMessage
 
     private void addArgument(final Object value)
     {
-        if (!map.containsKey("message"))
+        if (!map.has("message"))
             return;
         args.add(value);
         final String fmt = map.get("message").textValue();
@@ -435,12 +434,7 @@ public final class ProcessingMessage
         final SerializerProvider provider)
         throws IOException, JsonProcessingException
     {
-        jgen.writeStartObject();
-        for (final Map.Entry<String, JsonNode> entry: map.entrySet()) {
-            jgen.writeFieldName(entry.getKey());
-            jgen.writeTree(entry.getValue());
-        }
-        jgen.writeEndObject();
+        jgen.writeTree(map);
     }
 
     @Override
@@ -469,7 +463,7 @@ public final class ProcessingMessage
     @Override
     public String toString()
     {
-        final Map<String, JsonNode> tmp = Maps.newLinkedHashMap(map);
+        final Map<String, JsonNode> tmp = JacksonUtils.asMap(map);
         final JsonNode node = tmp.remove("message");
         final String message = node == null ? "(no message)": node.textValue();
         final StringBuilder sb = new StringBuilder().append(level).append(": ");
