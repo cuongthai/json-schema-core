@@ -230,8 +230,12 @@ public final class ProcessingMessage
      */
     public ProcessingMessage put(final String key, final Object value)
     {
-        return putJson(key, value == null ? NullNode.getInstance()
-            : JsonUtils.toString(value));
+        BUNDLE.checkNotNull(key, "processingMessage.nullKey");
+        if (value == null)
+            map.put(key, NullNode.getInstance());
+        else
+            map.put(key, value.toString());
+        return this;
     }
 
     /**
