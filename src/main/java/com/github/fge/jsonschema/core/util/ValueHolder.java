@@ -50,17 +50,6 @@ public final class ValueHolder<T>
         return new ValueHolder<V>(name, value);
     }
 
-    public static <V extends AsJson> ValueHolder<V> hold(final V value)
-    {
-        return new ValueHolder<V>("value", value);
-    }
-
-    public static <V extends AsJson> ValueHolder<V> hold(final String name,
-        final V value)
-    {
-        return new ValueHolder<V>(name, value);
-    }
-
     /**
      * Protected constructor
      *
