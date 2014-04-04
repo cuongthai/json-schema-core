@@ -28,7 +28,7 @@ public abstract class SchemaKey
 
     public static SchemaKey anonymousKey()
     {
-        return new AnonymousSchemaKey(ANONYMOUS_ID.incrementAndGet());
+        return new AnonymousSchemaKey(ANONYMOUS_ID.getAndIncrement());
     }
 
     public static SchemaKey absoluteKey(final JsonRef ref)
