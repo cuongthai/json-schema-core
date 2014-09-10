@@ -138,7 +138,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 
 artifacts {
     archives jar;
-    archives sourcesJar;
+    //archives sourcesJar;
 }
 
 task wrapper(type: Wrapper) {
