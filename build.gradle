@@ -106,11 +106,11 @@ javadoc.options.links("http://fge.github.io/uri-template/");
  * Also, we don't want gradle's default HTML report: it does not support
  * parameterized tests which I use a _lot_.
  */
-test {
+/*test {
     useTestNG() {
         useDefaultListeners = true;
     };
-}
+}*/
 
 /*
  * Necessary to generate the source and javadoc jars
@@ -139,7 +139,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives jar;
     archives sourcesJar;
-    archives javadocJar;
 }
 
 task wrapper(type: Wrapper) {
